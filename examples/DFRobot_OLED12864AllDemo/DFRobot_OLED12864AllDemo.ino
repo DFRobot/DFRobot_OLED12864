@@ -146,10 +146,10 @@ void setup(void) {
   pinMode(keyA, INPUT);
   pinMode(keyB, INPUT);
   Serial.begin(115200);
-  OLED.init();
-  OLED.flipScreenVertically();
   bme.begin();
   Serial.println();
+  OLED.init();
+  OLED.flipScreenVertically();
   Wire.beginTransmission(0x0B); // address of the accelerometer 
   Wire.write(0x20); 
   Wire.write(0x05);
@@ -229,5 +229,4 @@ void loop(void) {
   }
   OLED.display();
 }
-
 

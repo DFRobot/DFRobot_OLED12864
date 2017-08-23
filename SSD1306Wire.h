@@ -144,6 +144,8 @@ class SSD1306Wire : public OLEDDisplay, public Character_CN {
 			for(;i < 16;i ++) {
 				Character_CN::byteOverturn(&a_dot[i]);
 			}
+			a_dot[15] = 0;
+			a_dot[14] = 0;
 			OLEDDisplay::drawXbm(x, y, 8, 16, a_dot);
 		}
 		
