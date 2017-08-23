@@ -5,8 +5,8 @@
 
 const uint8_t pin_character_cs = 25;
 const uint8_t I2C_OLED_addr = 0x3c;
-const uint8_t keyA = D7;  //in esp8266: 4 esp32: D7
-const uint8_t keyB = D8;  //in esp8266: 0 esp32: D8
+const uint8_t keyA = D7;
+const uint8_t keyB = D8;
 const uint8_t pin_analogKey = A0;
 
 DFRobot_OLED12864 OLED(I2C_OLED_addr, pin_character_cs);
