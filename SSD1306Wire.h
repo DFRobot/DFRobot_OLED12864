@@ -166,7 +166,8 @@ class SSD1306Wire : public OLEDDisplay, public Character_CN {
 			
 			char unicode_hz[2] = {0};
 			char gb2312_hz [2] = {0};
-			char temp_char[2] = {0}; 
+			char temp_char[2] = {0};
+			char str_null[32] = {0};
 			int  temp = 0;
       if(Character_CN::character_type == CHARACTER_TYPE_UTF8) {
   			while(*ch) {
@@ -182,11 +183,13 @@ class SSD1306Wire : public OLEDDisplay, public Character_CN {
   					unicode_hz[0] = temp >> 8;
   					unicode_hz[1] = temp;
   					Character_CN::unicodeToGB2312(unicode_hz, gb2312_hz);
+						OLEDDisplay::drawXbm(x, y, 16, 16, str_null);
   					this->disCharacter(x, y, gb2312_hz);
   					x  += 16;
   					ch += 3;
   				} else {
   				  temp_char[0] = *ch;
+						OLEDDisplay::drawXbm(x, y, 8, 16, str_null);
             this->disChar(x, y, temp_char);
             x += 8;
             ch ++;
