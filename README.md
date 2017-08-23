@@ -55,14 +55,8 @@ Choose the font family, style and size, check the preview image and if you like 
 #include <Wire.h>  
 #include "DFRobot_OLED12864.h"
 
-DFRobot_OLED12864  display(ADDRESS, SDA, SDC);
-```
-or for a SH1106:
-```C++
-#include <Wire.h>  
-#include "SH1106.h"
+DFRobot_OLED12864  display(ADDRESS, PIN_CHARACTER_CS);
 
-SH1106  display(ADDRESS, SDA, SDC);
 ```
 
 ## API
@@ -105,6 +99,9 @@ void setContrast(char contrast);
 
 // Turn the display upside down
 void flipScreenVertically();
+
+// Display Chinese
+void disStr(uint8_t x, uint8_t y, char *ch);
 ```
 
 ## Pixel drawing
