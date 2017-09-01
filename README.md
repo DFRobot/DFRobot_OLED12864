@@ -1,5 +1,4 @@
-esp32-oled-ssd1306 [![Build Status](http://www.dfrobot.com.cn/community/portal.php)
-（It's my pleasure to communicate with you, please add my QQ 1003425554 or my e-mail 1003425554@qq.com）
+esp32-oled-ssd1306 (http://www.dfrobot.com.cn/community/portal.php)
 ============
 
 > We just released version 3.0.0. Please have a look at our [upgrade guide](UPGRADE-3.0.md)
@@ -314,3 +313,6 @@ OLEDDisplayUiState* getUiState();
 // you have to draw after drawing to keep the frame budget.
 int8_t update();
 ```
+
+
+（It's my pleasure to communicate with you, please add my QQ 1003425554 or my e-mail 1003425554@qq.com）
