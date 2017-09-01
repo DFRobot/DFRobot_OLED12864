@@ -1,11 +1,16 @@
 #include "DFRobot_OLED12864.h"
 
-#define ADC_BIT     4096
+#ifdef 					__ets__  			//esp8266
+#define ADC_BIT 1024
+#elif 	defined ESP_PLATFORM  //esp32
+#define ADC_BIT	4096
+#endif
+
 #define ADC_SECTION 5
 
-const uint8_t pin_character_cs = 25;
+const uint8_t pin_character_cs = D5;
 const uint8_t I2C_OLED_addr = 0x3c;
-const uint8_t keyA = D7;
+const uint8_t keyA = D4;
 const uint8_t keyB = D8;
 const uint8_t pin_analogKey = A0;
 
@@ -28,20 +33,15 @@ uint8_t read_key_analog(void) {
   int adValue = analogRead(pin_analogKey);
   if(adValue > ADC_BIT * (ADC_SECTION * 2 - 1) / (ADC_SECTION * 2)) {
     return key_analog_no;
-  }
-  else if(adValue > ADC_BIT * (ADC_SECTION * 2 - 3) / (ADC_SECTION * 2)) {
+  } else if(adValue > ADC_BIT * (ADC_SECTION * 2 - 3) / (ADC_SECTION * 2)) {
     return key_analog_right;
-  }
-  else if(adValue > ADC_BIT * (ADC_SECTION * 2 - 5) / (ADC_SECTION * 2)) {
+  } else if(adValue > ADC_BIT * (ADC_SECTION * 2 - 5) / (ADC_SECTION * 2)) {
     return key_analog_center;
-  }
-  else if(adValue > ADC_BIT * (ADC_SECTION * 2 - 7) / (ADC_SECTION * 2)) {
+  } else if(adValue > ADC_BIT * (ADC_SECTION * 2 - 7) / (ADC_SECTION * 2)) {
     return key_analog_up;
-  }
-  else if(adValue > ADC_BIT * (ADC_SECTION * 2 - 9) / (ADC_SECTION * 2)) {
+  } else if(adValue > ADC_BIT * (ADC_SECTION * 2 - 9) / (ADC_SECTION * 2)) {
     return key_analog_left;
-  }
-  else {
+  } else {
     return key_analog_down;
   }
 }
@@ -55,7 +55,6 @@ void setup(void) {
   OLED.init();
   OLED.flipScreenVertically();
   OLED.disStr(0, 0, "没有按键按下");
-  
 }
 
 void loop(void) {

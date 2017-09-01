@@ -1,6 +1,4 @@
 /**
- * The MIT License (MIT)
- *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
@@ -27,15 +25,6 @@
 // For a connection via I2C using Wire include
 #include <Wire.h>  // Only needed for Arduino 1.6.5 and earlier
 #include "DFRobot_OLED12864.h" // alias for `#include "DFRobot_OLED12864Wire.h"`
-// or #include "SH1106.h" alis for `#include "SH1106Wire.h"`
-// For a connection via I2C using brzo_i2c (must be installed) include
-// #include <brzo_i2c.h> // Only needed for Arduino 1.6.5 and earlier
-// #include "DFRobot_OLED12864Brzo.h"
-// #include "SH1106Brzo.h"
-// For a connection via SPI include
-// #include <SPI.h> // Only needed for Arduino 1.6.5 and earlier
-// #include "DFRobot_OLED12864Spi.h"
-// #include "SH1106SPi.h"
 
 // Include the UI lib
 #include "OLEDDisplayUi.h"

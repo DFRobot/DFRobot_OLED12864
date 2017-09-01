@@ -1,9 +1,4 @@
 /**
- * The MIT License (MIT)
- *
- * Copyright (c) 2016 by Daniel Eichhorn
- * Copyright (c) 2016 by Fabrice Weinberg
- *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
@@ -29,14 +24,9 @@
  #include <Wire.h>  // Only needed for Arduino 1.6.5 and earlier
  #include "DFRobot_OLED12864.h" 
 
- // Use the corresponding display class:
-
-
-
  // Initialize the OLED display using Wire library
- DFRobot_OLED12864  display(0x3c, 21, 22);
+ DFRobot_OLED12864  display(0x3c);
 
-// Adapted from Adafruit_DFRobot_OLED12864
 void drawLines() {
   for (int16_t i=0; i<DISPLAY_WIDTH; i+=4) {
     display.drawLine(0, 0, i, DISPLAY_HEIGHT-1);
@@ -89,7 +79,6 @@ void drawLines() {
   delay(250);
 }
 
-// Adapted from Adafruit_DFRobot_OLED12864
 void drawRect(void) {
   for (int16_t i=0; i<DISPLAY_HEIGHT/2; i+=2) {
     display.drawRect(i, i, DISPLAY_WIDTH-2*i, DISPLAY_HEIGHT-2*i);
@@ -98,7 +87,6 @@ void drawRect(void) {
   }
 }
 
-// Adapted from Adafruit_DFRobot_OLED12864
 void fillRect(void) {
   uint8_t color = 1;
   for (int16_t i=0; i<DISPLAY_HEIGHT/2; i+=3) {
@@ -112,7 +100,6 @@ void fillRect(void) {
   display.setColor(WHITE);
 }
 
-// Adapted from Adafruit_DFRobot_OLED12864
 void drawCircle(void) {
   for (int16_t i=0; i<DISPLAY_HEIGHT; i+=2) {
     display.drawCircle(DISPLAY_WIDTH/2, DISPLAY_HEIGHT/2, i);

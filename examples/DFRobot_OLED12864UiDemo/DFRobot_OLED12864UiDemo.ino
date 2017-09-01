@@ -1,9 +1,4 @@
 /**
- * The MIT License (MIT)
- *
- * Copyright (c) 2016 by Daniel Eichhorn
- * Copyright (c) 2016 by Fabrice Weinberg
- *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
@@ -36,8 +31,7 @@
 #include "images.h"
 
 // Initialize the OLED display using Wire library
-DFRobot_OLED12864  display(0x3c, D3, D5);
-// SH1106 display(0x3c, D3, D5);
+DFRobot_OLED12864  display(0x3c);
 
 OLEDDisplayUi ui     ( &display );
 
