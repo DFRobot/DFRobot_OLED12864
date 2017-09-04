@@ -304,6 +304,4 @@ OLEDDisplayUiState* getUiState();
 // you have to draw after drawing to keep the frame budget.
 int8_t update();
 ```
-
-
-（It's my pleasure to communicate with you, please add my QQ 1003425554 or my e-mail 1003425554@qq.com）
+Welcome to our forum
