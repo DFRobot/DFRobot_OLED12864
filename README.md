@@ -304,4 +304,4 @@ OLEDDisplayUiState* getUiState();
 // you have to draw after drawing to keep the frame budget.
 int8_t update();
 ```
-Welcome to our forum
+Welcome to our forum.(http://www.dfrobot.com.cn/community/portal.php)
