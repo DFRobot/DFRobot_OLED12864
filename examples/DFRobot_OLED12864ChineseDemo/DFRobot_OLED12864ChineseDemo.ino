@@ -16,7 +16,7 @@ void setup(void) {
 
 void loop(void) {
 
-  OLED.disStr(0, 0, "成都极趣科技成都极趣科技");
+  OLED.disStr(0, 0, "fireBeetle萤火虫系列");
   OLED.display();
   Serial.println("show");
   delay(1000);
