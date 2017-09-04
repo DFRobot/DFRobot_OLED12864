@@ -1,4 +1,4 @@
-esp32-oled-ssd1306 (http://www.dfrobot.com.cn/community/portal.php)
+esp32-oled-ssd1306 (https://www.dfrobot.com/search-Firebeetle.html)
 ============
 
 > We just released version 3.0.0. Please have a look at our [upgrade guide](UPGRADE-3.0.md)
