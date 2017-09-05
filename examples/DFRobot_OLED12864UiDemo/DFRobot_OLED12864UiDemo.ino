@@ -19,10 +19,10 @@
  *
  */
 
- // Include the correct display library
- // For a connection via I2C using Wire include
- #include <Wire.h>  // Only needed for Arduino 1.6.5 and earlier
- #include "DFRobot_OLED12864.h"
+// Include the correct display library
+// For a connection via I2C using Wire include
+#include <Wire.h>  // Only needed for Arduino 1.6.5 and earlier
+#include "DFRobot_OLED12864.h"
 
 // Include the UI lib
 #include "OLEDDisplayUi.h"
@@ -33,15 +33,17 @@
 // Initialize the OLED display using Wire library
 DFRobot_OLED12864  display(0x3c);
 
-OLEDDisplayUi ui     ( &display );
+OLEDDisplayUi ui(&display);
 
-void msOverlay(OLEDDisplay *display, OLEDDisplayUiState* state) {
+void msOverlay(OLEDDisplay *display, OLEDDisplayUiState* state)
+{
   display->setTextAlignment(TEXT_ALIGN_RIGHT);
   display->setFont(ArialMT_Plain_10);
   display->drawString(128, 0, String(millis()));
 }
 
-void drawFrame1(OLEDDisplay *display, OLEDDisplayUiState* state, int16_t x, int16_t y) {
+void drawFrame1(OLEDDisplay *display, OLEDDisplayUiState* state, int16_t x, int16_t y)
+{
   // draw an xbm image.
   // Please note that everything that should be transitioned
   // needs to be drawn relative to x and y
@@ -49,7 +51,8 @@ void drawFrame1(OLEDDisplay *display, OLEDDisplayUiState* state, int16_t x, int1
   display->drawXbm(x + 34, y + 14, WiFi_Logo_width, WiFi_Logo_height, WiFi_Logo_bits);
 }
 
-void drawFrame2(OLEDDisplay *display, OLEDDisplayUiState* state, int16_t x, int16_t y) {
+void drawFrame2(OLEDDisplay *display, OLEDDisplayUiState* state, int16_t x, int16_t y)
+{
   // Demonstrates the 3 included default sizes. The fonts come from DFRobot_OLED12864Fonts.h file
   // Besides the default fonts there will be a program to convert TrueType fonts into this format
   display->setTextAlignment(TEXT_ALIGN_LEFT);
@@ -63,7 +66,8 @@ void drawFrame2(OLEDDisplay *display, OLEDDisplayUiState* state, int16_t x, int1
   display->drawString(0 + x, 34 + y, "Arial 24");
 }
 
-void drawFrame3(OLEDDisplay *display, OLEDDisplayUiState* state, int16_t x, int16_t y) {
+void drawFrame3(OLEDDisplay *display, OLEDDisplayUiState* state, int16_t x, int16_t y)
+{
   // Text alignment demo
   display->setFont(ArialMT_Plain_10);
 
@@ -80,7 +84,8 @@ void drawFrame3(OLEDDisplay *display, OLEDDisplayUiState* state, int16_t x, int1
   display->drawString(128 + x, 33 + y, "Right aligned (128,33)");
 }
 
-void drawFrame4(OLEDDisplay *display, OLEDDisplayUiState* state, int16_t x, int16_t y) {
+void drawFrame4(OLEDDisplay *display, OLEDDisplayUiState* state, int16_t x, int16_t y)
+{
   // Demo for drawStringMaxWidth:
   // with the third parameter you can define the width after which words will be wrapped.
   // Currently only spaces and "-" are allowed for wrapping
@@ -89,7 +94,8 @@ void drawFrame4(OLEDDisplay *display, OLEDDisplayUiState* state, int16_t x, int1
   display->drawStringMaxWidth(0 + x, 10 + y, 128, "Lorem ipsum\n dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.");
 }
 
-void drawFrame5(OLEDDisplay *display, OLEDDisplayUiState* state, int16_t x, int16_t y) {
+void drawFrame5(OLEDDisplay *display, OLEDDisplayUiState* state, int16_t x, int16_t y)
+{
 
 }
 
@@ -104,7 +110,8 @@ int frameCount = 5;
 OverlayCallback overlays[] = { msOverlay };
 int overlaysCount = 1;
 
-void setup() {
+void setup()
+{
   Serial.begin(115200);
   Serial.println();
   Serial.println();
@@ -139,11 +146,11 @@ void setup() {
   ui.init();
 
   display.flipScreenVertically();
-
 }
 
 
-void loop() {
+void loop()
+{
   int remainingTimeBudget = ui.update();
 
   if (remainingTimeBudget > 0) {

@@ -31,23 +31,26 @@
 // Initialize the OLED display using Wire library
 DFRobot_OLED12864  display(0x3c);
 
-void setup() {
-  Serial.begin(115200);
-  Serial.println();
-  Serial.println();
- // Initialising the UI will init the display too.
-  display.init();
-  display.flipScreenVertically();// flip vertical
- display.clear();
- drawImageDemo();
- display.display();
-
-}
-void drawImageDemo() {
-    display.drawXbm(0, 0, Picture_width, Picture_height, Picture_bits);
+void setup()
+{
+	Serial.begin(115200);
+	Serial.println();
+	Serial.println();
+	// Initialising the UI will init the display too.
+	display.init();
+	display.flipScreenVertically();// flip vertical
+	display.clear();
+	drawImageDemo();
+	display.display();
 }
 
-void loop() {
+void drawImageDemo()
+{
+  display.drawXbm(0, 0, Picture_width, Picture_height, Picture_bits);
+}
+
+void loop()
+{
   // clear the display
  
 }

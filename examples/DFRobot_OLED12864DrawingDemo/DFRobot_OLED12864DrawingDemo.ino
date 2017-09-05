@@ -19,15 +19,16 @@
  *
  */
 
- // Include the correct display library
- // For a connection via I2C using Wire include
- #include <Wire.h>  // Only needed for Arduino 1.6.5 and earlier
- #include "DFRobot_OLED12864.h" 
+	// Include the correct display library
+	// For a connection via I2C using Wire include
+	#include <Wire.h>  // Only needed for Arduino 1.6.5 and earlier
+	#include "DFRobot_OLED12864.h" 
 
- // Initialize the OLED display using Wire library
- DFRobot_OLED12864  display(0x3c);
+	// Initialize the OLED display using Wire library
+	DFRobot_OLED12864  display(0x3c);
 
-void drawLines() {
+void drawLines()
+{
   for (int16_t i=0; i<DISPLAY_WIDTH; i+=4) {
     display.drawLine(0, 0, i, DISPLAY_HEIGHT-1);
     display.display();
@@ -79,7 +80,8 @@ void drawLines() {
   delay(250);
 }
 
-void drawRect(void) {
+void drawRect(void)
+{
   for (int16_t i=0; i<DISPLAY_HEIGHT/2; i+=2) {
     display.drawRect(i, i, DISPLAY_WIDTH-2*i, DISPLAY_HEIGHT-2*i);
     display.display();
@@ -87,7 +89,8 @@ void drawRect(void) {
   }
 }
 
-void fillRect(void) {
+void fillRect(void)
+{
   uint8_t color = 1;
   for (int16_t i=0; i<DISPLAY_HEIGHT/2; i+=3) {
     display.setColor((color % 2 == 0) ? BLACK : WHITE); // alternate colors
@@ -100,7 +103,8 @@ void fillRect(void) {
   display.setColor(WHITE);
 }
 
-void drawCircle(void) {
+void drawCircle(void)
+{
   for (int16_t i=0; i<DISPLAY_HEIGHT; i+=2) {
     display.drawCircle(DISPLAY_WIDTH/2, DISPLAY_HEIGHT/2, i);
     display.display();
@@ -128,7 +132,8 @@ void drawCircle(void) {
   display.display();
 }
 
-void printBuffer(void) {
+void printBuffer(void)
+{
   // Initialize the log buffer
   // allocate memory to store 8 lines of text and 30 chars per line.
   display.setLogBuffer(5, 30);
@@ -160,7 +165,8 @@ void printBuffer(void) {
   }
 }
 
-void setup() {
+void setup()
+{
   display.init();
 
   // display.flipScreenVertically();

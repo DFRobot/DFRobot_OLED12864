@@ -44,71 +44,74 @@ uint8_t o;
 
 DFRobot_OLED12864  display(0x3c);
 
-void setup() {
-  Serial.begin(115200);
- // Initialising the UI will init the display too.
-  display.init();
-  display.flipScreenVertically();// flip vertical
-  Wire.begin(); 
-  Wire.beginTransmission(0x0B); // address of the accelerometer 
-  // low pass filter, range settings 
-  Wire.write(0x20); 
-  Wire.write(0x05); 
-  Wire.endTransmission();
-
+void setup()
+{
+	Serial.begin(115200);
+	// Initialising the UI will init the display too.
+	display.init();
+	display.flipScreenVertically();// flip vertical
+	Wire.begin(); 
+	Wire.beginTransmission(0x0B); // address of the accelerometer 
+	// low pass filter, range settings 
+	Wire.write(0x20); 
+	Wire.write(0x05); 
+	Wire.endTransmission();
 }
+
 void AccelerometerInit() 
 { 
-   Wire.beginTransmission(0x0B); // address of the accelerometer 
-  // reset the accelerometer 
-  Wire.write(0x04); // Y data
-  Wire.endTransmission(); 
-  Wire.requestFrom(0x0B,1);    // request 6 bytes from slave device #2
-  while(Wire.available())    // slave may send less than requested
-  { 
-    Version[0] = Wire.read(); // receive a byte as characte
-  }  
-  x_data = (int8_t)Version[0] >> 2;
- 
-  Wire.beginTransmission(0x0B); // address of the accelerometer 
-  // reset the accelerometer 
-  Wire.write(0x06); // Y data
-  Wire.endTransmission(); 
-  Wire.requestFrom(0x0B,1);    // request 6 bytes from slave device #2
-  while(Wire.available())    // slave may send less than requested
-  { 
-    Version[1] = Wire.read(); // receive a byte as characte
-  }  
-  y_data = (int8_t)Version[1] >> 2;
-  
-  Wire.beginTransmission(0x0B); // address of the accelerometer 
-  // reset the accelerometer 
-  Wire.write(0x08); // Y data
-  Wire.endTransmission(); 
-  Wire.requestFrom(0x0B,1);    // request 6 bytes from slave device #2
-   while(Wire.available())    // slave may send less than requested
-  { 
-    Version[2] = Wire.read(); // receive a byte as characte
-  }  
-   z_data = (int8_t)Version[2] >> 2; 
-   a = x_data;
-   b = y_data;
-   c = z_data;
-   Serial.print("acc_X = ");
-   Serial.print(a);
-   Serial.print("  ");
-   Serial.print("acc_Y = ");
-   Serial.print(b);
-   Serial.print("  ");
-   Serial.print("acc_Z = ");
-   Serial.println(c);
+	Wire.beginTransmission(0x0B); // address of the accelerometer 
+	// reset the accelerometer 
+	Wire.write(0x04); // Y data
+	Wire.endTransmission(); 
+	Wire.requestFrom(0x0B,1);    // request 6 bytes from slave device #2
+	while(Wire.available())    // slave may send less than requested
+	{ 
+	Version[0] = Wire.read(); // receive a byte as characte
+	}  
+	x_data = (int8_t)Version[0] >> 2;
+
+	Wire.beginTransmission(0x0B); // address of the accelerometer 
+	// reset the accelerometer 
+	Wire.write(0x06); // Y data
+	Wire.endTransmission(); 
+	Wire.requestFrom(0x0B,1);    // request 6 bytes from slave device #2
+	while(Wire.available())    // slave may send less than requested
+	{ 
+	Version[1] = Wire.read(); // receive a byte as characte
+	}  
+	y_data = (int8_t)Version[1] >> 2;
+
+	Wire.beginTransmission(0x0B); // address of the accelerometer 
+	// reset the accelerometer 
+	Wire.write(0x08); // Y data
+	Wire.endTransmission(); 
+	Wire.requestFrom(0x0B,1);    // request 6 bytes from slave device #2
+	while(Wire.available())    // slave may send less than requested
+	{ 
+	Version[2] = Wire.read(); // receive a byte as characte
+	}  
+	z_data = (int8_t)Version[2] >> 2; 
+	a = x_data;
+	b = y_data;
+	c = z_data;
+	Serial.print("acc_X = ");
+	Serial.print(a);
+	Serial.print("  ");
+	Serial.print("acc_Y = ");
+	Serial.print(b);
+	Serial.print("  ");
+	Serial.print("acc_Z = ");
+	Serial.println(c);
 } 
 
-void drawImageDemo(void) {
-    display.drawXbm(k, o, Picture_width, Picture_height, Picture_bits);
+void drawImageDemo(void)
+{
+  display.drawXbm(k, o, Picture_width, Picture_height, Picture_bits);
 }
 
-void loop(void) { 
+void loop(void)
+{ 
   if(a > 0) {
     k = 64 - (a * 4);
   } else {

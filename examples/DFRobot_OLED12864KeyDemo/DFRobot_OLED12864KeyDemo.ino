@@ -1,9 +1,11 @@
 #include "DFRobot_OLED12864.h"
 
-#ifdef 					__ets__  			//esp8266
+#ifdef 					__ets__       //esp8266
 #define ADC_BIT 1024
 #elif 	defined ESP_PLATFORM  //esp32
 #define ADC_BIT	4096
+#else
+#define ADC_BIT 1024          //other MCU, revise according to actual situation
 #endif
 
 #define ADC_SECTION 5
@@ -18,18 +20,18 @@ DFRobot_OLED12864 OLED(I2C_OLED_addr, pin_character_cs);
 
 const char drawNull[256] = {0};
 
-enum {
-key_analog_no,
-key_analog_right,
-key_analog_center,
-key_analog_up,
-key_analog_left,
-key_analog_down,
-} key_analog_status;
+enum enum_key_analog {
+	key_analog_no,
+	key_analog_right,
+	key_analog_center,
+	key_analog_up,
+	key_analog_left,
+	key_analog_down,
+} eKey_analog;
 
 
-uint8_t read_key_analog(void) {
-
+enum_key_analog read_key_analog(void)
+{
   int adValue = analogRead(pin_analogKey);
   if(adValue > ADC_BIT * (ADC_SECTION * 2 - 1) / (ADC_SECTION * 2)) {
     return key_analog_no;
@@ -47,8 +49,8 @@ uint8_t read_key_analog(void) {
 }
 
 
-void setup(void) {
-
+void setup(void)
+{
   pinMode(keyA, INPUT);
   pinMode(keyB, INPUT);
   Serial.begin(115200);
@@ -57,8 +59,8 @@ void setup(void) {
   OLED.disStr(0, 0, "没有按键按下");
 }
 
-void loop(void) {
-
+void loop(void)
+{
   OLED.clear();
   if(digitalRead(keyA) == 0) {
     delay(10);
@@ -79,9 +81,9 @@ void loop(void) {
     OLED.disStr(0, 0, "没有按键被按下");
   }
   uint8_t keyAnalog = 0;
-  keyAnalog = read_key_analog();
+  eKey_analog = read_key_analog();
   OLED.drawXbm(0, 16, 128, 16, drawNull);
-  switch(keyAnalog) {
+  switch(eKey_analog) {
     case key_analog_no:     OLED.disStr(0, 16, "模拟按键未被按下");break;
     case key_analog_up:     OLED.disStr(0, 16, "模拟按键向上");break;
     case key_analog_down:   OLED.disStr(0, 16, "模拟按键向下");break;

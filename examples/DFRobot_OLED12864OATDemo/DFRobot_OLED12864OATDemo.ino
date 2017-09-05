@@ -30,7 +30,8 @@ DFRobot_OLED12864  display(0x3c);
 
 int counter = 1;
 
-void setup() {
+void setup()
+{
   Serial.begin(115200);
   Serial.println();
   Serial.println();
@@ -40,7 +41,9 @@ void setup() {
    display.flipScreenVertically();
 
 }
-void drawProgressBarDemo() {
+
+void drawProgressBarDemo()
+{
   int progress = (counter / 5) % 100;
   // draw the progress bar
   display.drawProgressBar(0, 32, 120, 10, progress);
@@ -49,14 +52,16 @@ void drawProgressBarDemo() {
   display.setTextAlignment(TEXT_ALIGN_CENTER);
   display.drawString(64, 15, String(progress) + "%");
 }
-void loop() {
-  // clear the display
-  display.clear();
-  // draw the current demo method
- drawProgressBarDemo();
 
-  // write the buffer to the display
-   display.display();
-   counter++;
-   delay(10);
-  }
+void loop()
+{
+	// clear the display
+	display.clear();
+	// draw the current demo method
+	drawProgressBarDemo();
+
+	// write the buffer to the display
+	display.display();
+	counter++;
+	delay(10);
+}

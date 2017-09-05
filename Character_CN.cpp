@@ -1,8 +1,8 @@
 #include "Character_CN.h"
 
 
-void Character_CN::byteOverturn(char *ch) {
-	
+void Character_CN::byteOverturn(char *ch)
+{
 	char temp = *ch;
   *ch = 0;
   uint8_t i;
@@ -14,8 +14,8 @@ void Character_CN::byteOverturn(char *ch) {
 }
 
 
-uint32_t Character_CN::GB2312_addr(char *ch, uint8_t type) {
-	
+uint32_t Character_CN::GB2312_addr(char *ch, uint8_t type)
+{
 	uint32_t temp = 0;
   if(ch[0]<0x80) {
     if( ch[0] >= ' ' )
@@ -35,8 +35,8 @@ uint32_t Character_CN::GB2312_addr(char *ch, uint8_t type) {
 }
 
 
-void Character_CN::readByte(uint32_t addr, uint8_t len, char *ch) {
-  
+void Character_CN::readByte(uint32_t addr, uint8_t len, char *ch)
+{  
   digitalWrite(this->cs, 0);
   SPI.transfer(0x0b);
   SPI.transfer(addr >> 16);
@@ -51,8 +51,8 @@ void Character_CN::readByte(uint32_t addr, uint8_t len, char *ch) {
 }
 
 
-char Character_CN::unicodeToGB2312(char *unicode, char *GB2312) {
-	
+char Character_CN::unicodeToGB2312(char *unicode, char *GB2312)
+{	
 	uint32_t addr;
   uint8_t result=0;
   uint32_t h;
