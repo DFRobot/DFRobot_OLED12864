@@ -51,6 +51,4 @@ void drawImageDemo()
 
 void loop()
 {
-  // clear the display
- 
 }
