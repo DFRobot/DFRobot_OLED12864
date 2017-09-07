@@ -14,8 +14,12 @@ platformio lib install 562
 ```
 
 ## Credits
-This library has initially been written by Daniel Eichhorn (@squix78). Many thanks go to Fabrice Weinberg (@FWeinb) for optimizing and refactoring many aspects of the library. Also many thanks to the many committers who helped to add new features and who fixed many bugs.
-The init sequence for the SSD1306 was inspired by Adafruit's library for the same display.
+Referring to (https://github.com/squix78/esp8266-oled-ssd1306) of squix78 at here, Thanks for info and resource shared of squix78!
+some exceptional cool modules has been added to FireBeetle ESP Baords-DFR.
+Such as BMA220, BME280 and multilanguage character chips(Support Chinese now, still updating), one 5 directions switch and 2 digital keys.
+Note: Please download BME280 Arduino library first when use Humidity & Temperature sensors (https://github.com/DFRobot/DFRobot_BME280).
+For more questions or interesting projects, you can visit the [forum](https://www.dfrobot.com/)!
+
 
 ## Usage
 
