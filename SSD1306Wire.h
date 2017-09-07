@@ -35,7 +35,7 @@
 class SSD1306Wire : public OLEDDisplay, public Character_CN {
 
 private:
-		uint8_t             _address;
+		uint8_t    _address;
 
 public:
 	SSD1306Wire(uint8_t _address, uint8_t cs = 0) {
@@ -136,12 +136,11 @@ public:
 		#endif
 	}
 	
-	void disStr(uint8_t x, uint8_t y, char *ch) {
-		
+	void disStr(uint8_t x, uint8_t y, char *ch) 
+	{	
 		char unicode_hz[2] = {0};
 		char gb2312_hz [2] = {0};
 		char temp_char[2] = {0};
-		char str_null[32] = {0};
 		int  temp = 0;
 		if(Character_CN::character_type == CHARACTER_TYPE_UTF8) {
 			while(*ch) {
@@ -156,21 +155,21 @@ public:
 					temp = (*ch & 0x0f) << 12 | (*(ch + 1) & 0x3f) << 6 | (*(ch + 2) & 0x3f);
 					unicode_hz[0] = temp >> 8;
 					unicode_hz[1] = temp;
+					Serial.print(" ");
+					Serial.print(unicode_hz[0], HEX);
+					Serial.print(unicode_hz[1], HEX);
 					Character_CN::unicodeToGB2312(unicode_hz, gb2312_hz);
-					OLEDDisplay::drawXbm(x, y, 16, 16, str_null);
 					this->disCharacter(x, y, gb2312_hz);
 					x  += 16;
 					ch += 3;
 				} else if((*ch & 0x80) == 0x80) {
 					gb2312_hz[0] = *ch;
 					gb2312_hz[1] = *(ch + 1);
-					OLEDDisplay::drawXbm(x, y, 16, 16, str_null);
 					this->disCharacter(x, y, gb2312_hz);
 					x += 16;
 					ch += 2;
 				} else {
 					temp_char[0] = *ch;
-					OLEDDisplay::drawXbm(x, y, 8, 16, str_null);
 					this->disChar(x, y, temp_char);
 					x += 8;
 					ch ++;
@@ -182,15 +181,16 @@ public:
 	}
 
 private:
-	inline void sendCommand(uint8_t command) __attribute__((always_inline)){
+	inline void sendCommand(uint8_t command) __attribute__((always_inline))
+	{
 		Wire.beginTransmission(_address);
 		Wire.write(0x80);
 		Wire.write(command);
 		Wire.endTransmission();
 	}
 
-	void disChar(uint8_t x, uint8_t y, char *ch) {
-		
+	void disChar(uint8_t x, uint8_t y, char *ch)
+	{	
 		char a_dot[16];
 		uint32_t a_dot_address;
 		uint8_t i = 0;
@@ -204,8 +204,8 @@ private:
 		OLEDDisplay::drawXbm(x, y, 8, 16, a_dot);
 	}
 	
-	void disCharacter(uint8_t x, uint8_t y, char *ch) {
-		
+	void disCharacter(uint8_t x, uint8_t y, char *ch)
+	{	
 		char a_dot[32];
 		uint32_t a_dot_address;
 		int i,j;

@@ -82,6 +82,17 @@ void OLEDDisplay::setPixel(int16_t x, int16_t y) {
   }
 }
 
+void OLEDDisplay::clearPixel(int16_t x, int16_t y)
+{
+	if (x >= 0 && x < 128 && y >= 0 && y < 64) {
+    switch (color) {
+      case WHITE:   buffer[x + (y / 8) * DISPLAY_WIDTH] &= ~(1 << (y & 7)); break;
+      case BLACK:   buffer[x + (y / 8) * DISPLAY_WIDTH] |=  (1 << (y & 7)); break;
+      case INVERSE: buffer[x + (y / 8) * DISPLAY_WIDTH] ^=  (1 << (y & 7)); break;
+    }
+  }
+}
+
 // Bresenham's algorithm - thx wikipedia and Adafruit_GFX
 void OLEDDisplay::drawLine(int16_t x0, int16_t y0, int16_t x1, int16_t y1) {
   int16_t steep = abs(y1 - y0) > abs(x1 - x0);
@@ -365,6 +376,8 @@ void OLEDDisplay::drawXbm(int16_t xMove, int16_t yMove, int16_t width, int16_t h
       // if there is a bit draw it
       if (data & 0x01) {
         setPixel(xMove + x, yMove + y);
+      } else {
+				clearPixel(xMove + x, yMove + y);
       }
     }
   }

@@ -37,8 +37,8 @@ enum enum_key_analog {
 int8_t a = 0, b = 0, c = 0;
 char str_temp[] = "T:00.00  C"; 		 //温度
 char str_hum[]  = "H:00.00% RH"; 		 //湿度
-char str_pres[] = "P:00.00  ATM"; 	 //压力
-char str_alt[]  = "A:0000   FT";		 //海拔
+char str_pres[] = "P:00000  pa"; 	 //压力
+char str_alt[]  = "A:00000  m";		 //海拔
 char str_x[] = "X:+00";
 char str_y[] = "Y:+00";
 char str_z[] = "Z:+00";
@@ -70,20 +70,11 @@ enum_key_analog read_key_analog(void)
 
 void numToStr(char *ch, float dat)
 {
-  int temp = 0;
-  if(dat < 500) {
-    temp = dat * 100;
-    ch[2] = str_num[temp / 1000];
-    ch[3] = str_num[temp / 100 % 10];
-    ch[5] = str_num[temp / 10 % 10];
-    ch[6] = str_num[temp % 10];
-  } else {
-    temp = dat;
-    ch[2] = str_num[temp / 1000];
-    ch[3] = str_num[temp / 100 % 10];
-    ch[4] = str_num[temp / 10 % 10];
-    ch[5] = str_num[temp % 10];
-  }
+  int var = dat * 100;
+  ch[2] = str_num[var / 1000];
+  ch[3] = str_num[var / 100 % 10];
+  ch[5] = str_num[var / 10 % 10];
+  ch[6] = str_num[var % 10];
 }
 
 
@@ -100,60 +91,72 @@ void numToStr1(char *ch, int8_t dat)
 }
 
 
+void numToStr2(char *ch, float dat)
+{
+  uint16_t var = (uint16_t) dat;
+  ch[2] = str_num[var / 10000];
+  ch[3] = str_num[var / 1000 % 10];
+  ch[4] = str_num[var / 100 % 10];
+  ch[5] = str_num[var / 10 % 10];
+  ch[6] = str_num[var % 10];
+}
+
+
 void AccelerometerInit(void)
 {
-	byte Version[3] = {0};
-	int8_t x_data = 0, y_data = 0, z_data = 0;
-	Wire.beginTransmission(0x0B); // address of the accelerometer 
-	// reset the accelerometer 
-	Wire.write(0x04); // Y data
-	Wire.endTransmission(); 
-	Wire.requestFrom(0x0B,1);    // request 6 bytes from slave device #2
-	while(Wire.available())    // slave may send less than requested
-	{ 
-		Version[0] = Wire.read(); // receive a byte as characte
-	}  
-	x_data = (int8_t)Version[0] >> 2;
-
-	Wire.beginTransmission(0x0B); // address of the accelerometer 
-	// reset the accelerometer 
-	Wire.write(0x06); // Y data
-	Wire.endTransmission(); 
-	Wire.requestFrom(0x0B,1);    // request 6 bytes from slave device #2
-	while(Wire.available())    // slave may send less than requested
-	{ 
-		Version[1] = Wire.read(); // receive a byte as characte
-	}  
-	y_data = (int8_t)Version[1] >> 2;
-
-	Wire.beginTransmission(0x0B); // address of the accelerometer 
-	// reset the accelerometer 
-	Wire.write(0x08); // Y data
-	Wire.endTransmission(); 
-	Wire.requestFrom(0x0B,1);    // request 6 bytes from slave device #2
-	while(Wire.available()) 
-	{ 
-		Version[2] = Wire.read(); // receive a byte as characte
-	}
-	z_data = (int8_t)Version[2] >> 2; 
-	a = x_data;
-	b = y_data;
-	c = z_data;
-	Serial.print("acc_X = ");
-	Serial.print(a);
-	Serial.print("  ");
-	Serial.print("acc_Y = ");
-	Serial.print(b);
-	Serial.print("  ");
-	Serial.print("acc_Z = ");
-	Serial.println(c);
+  byte Version[3] = {0};
+  int8_t x_data = 0, y_data = 0, z_data = 0;
+  Wire.beginTransmission(0x0B); // address of the accelerometer 
+  // reset the accelerometer 
+  Wire.write(0x04); // Y data
+  Wire.endTransmission(); 
+  Wire.requestFrom(0x0B,1);    // request 6 bytes from slave device #2
+  while(Wire.available())    // slave may send less than requested
+  { 
+  	Version[0] = Wire.read(); // receive a byte as characte
+  }  
+  x_data = (int8_t)Version[0] >> 2;
+  
+  Wire.beginTransmission(0x0B); // address of the accelerometer 
+  // reset the accelerometer 
+  Wire.write(0x06); // Y data
+  Wire.endTransmission(); 
+  Wire.requestFrom(0x0B,1);    // request 6 bytes from slave device #2
+  while(Wire.available())    // slave may send less than requested
+  { 
+  	Version[1] = Wire.read(); // receive a byte as characte
+  }  
+  y_data = (int8_t)Version[1] >> 2;
+  
+  Wire.beginTransmission(0x0B); // address of the accelerometer 
+  // reset the accelerometer 
+  Wire.write(0x08); // Y data
+  Wire.endTransmission(); 
+  Wire.requestFrom(0x0B,1);    // request 6 bytes from slave device #2
+  while(Wire.available()) 
+  { 
+  	Version[2] = Wire.read(); // receive a byte as characte
+  }
+  z_data = (int8_t)Version[2] >> 2; 
+  a = x_data;
+  b = y_data;
+  c = z_data;
+  Serial.print("acc_X = ");
+  Serial.print(a);
+  Serial.print("  ");
+  Serial.print("acc_Y = ");
+  Serial.print(b);
+  Serial.print("  ");
+  Serial.print("acc_Z = ");
+  Serial.println(c);
 }
 
 
 void setup(void)
 {
-  pinMode(keyA, INPUT);
+  pinMode(keyA, OUTPUT);
   pinMode(keyB, INPUT);
+  digitalWrite(keyA, 1);
   Serial.begin(115200);
   bme.begin(0x76);
   Serial.println();
@@ -181,8 +184,8 @@ void loop(void)
 				alt = bme.altitudeValue(SEALEVELPRESSURE);
         numToStr(str_temp, temp);
         numToStr(str_hum, hum);
-        numToStr(str_pres, pre);
-        numToStr(str_alt, alt);
+        numToStr2(str_pres, pre);
+        numToStr2(str_alt, alt);
         Serial.print(str_temp);
         Serial.print("  ");
         Serial.print(str_hum);
@@ -231,4 +234,3 @@ void loop(void)
   }
   OLED.display();
 }
-

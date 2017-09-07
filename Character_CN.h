@@ -4,9 +4,13 @@
 #include "SPI.h"
 #include "Wire.h"
 #include "Arduino.h"
+#include "table_punctuation_CN.h"
+
 
 #define CHARACTER_TYPE_UNICODE 0
 #define CHARACTER_TYPE_UTF8    1
+
+#define ADDR_CCP         ((uint32_t)0x22242c)  //character chinese punctuation
 
 #define ASC0808D2HZ_ADDR ( 0x66c0  )
 #define ASC0812M2ZF_ADDR ( 0x66d40 )
@@ -28,7 +32,7 @@
 #define   CHARACTER_TYPE_16   2  //16 bits character height
 
 class Character_CN {
-	
+
 public:
 	uint8_t   cs;
 	uint8_t   character_type = CHARACTER_TYPE_UTF8;

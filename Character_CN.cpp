@@ -17,7 +17,7 @@ void Character_CN::byteOverturn(char *ch)
 uint32_t Character_CN::GB2312_addr(char *ch, uint8_t type)
 {
 	uint32_t temp = 0;
-  if(ch[0]<0x80) {
+  if((ch[0] & 0x80) != 0x80) {
     if( ch[0] >= ' ' )
     temp = ch[0] - ' ';
     if( type == CHARACTER_TYPE_8 )        temp = temp*8  + ASC0808D2HZ_ADDR;      //7*8 ascii code
@@ -27,7 +27,7 @@ uint32_t Character_CN::GB2312_addr(char *ch, uint8_t type)
     if(ch[0] >=0xA4 && ch[0] <= 0Xa8 && ch[1] >=0xA1)
 			temp = JFLS1516HZ_ADDR;
     else if(ch[0] >=0xA1 && ch[0] <= 0Xa9 && ch[1] >=0xA1)
-			temp =( (ch[0] - 0xA1) * 94 + (ch[1] - 0xA1))*32+ JFLS1516HZ_ADDR;
+			temp =( (ch[0] - 0xA1) * 94 + (ch[1] - 0xA1))*32+ ADDR_CCP;
     else if(ch[0] >=0xB0 && ch[0] <= 0xF7 && ch[1] >=0xA1)
 			temp = ((ch[0] - 0xB0) * 94 + (ch[1] - 0xA1)+ 846)*32+ JFLS1516HZ_ADDR;
   }
@@ -59,7 +59,16 @@ char Character_CN::unicodeToGB2312(char *unicode, char *GB2312)
   uint32_t code;
   code = *unicode++;
   code = (code<<8) + *unicode;
-  if(code<0xa0) result=1;
+	if(code < 0x4e00 || code > 0x9FBF) {
+    for(int i = 0 ; i < sizeof(table_punctuation_CN) / 4 ; i ++) {
+      if(table_punctuation_CN[i][0] == code) {
+        GB2312[0] = table_punctuation_CN[i][1] >> 8;
+        GB2312[1] = table_punctuation_CN[i][1];
+				return 0;
+      }
+    }
+  }
+  else if(code<0xa0) result=1;
   else if(code<=0xf7) h=code-160;
   else if(code<0x2c7) result=1;
   else if(code<=0x2c9) h=code-160-463;
@@ -95,5 +104,4 @@ char Character_CN::unicodeToGB2312(char *unicode, char *GB2312)
   }
   return 0;
 }
-
 
