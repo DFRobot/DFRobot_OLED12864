@@ -11,7 +11,7 @@
 #endif
 
 #define ADC_SECTION 5
-#define SEALEVELPRESSURE 1013.25f
+#define SEA_LEVEL_PRESSURE 1013.25f
 
 const uint8_t  I2C_addr = 0x3c;
 const uint8_t  pin_SPI_cs = D5;
@@ -154,9 +154,8 @@ void AccelerometerInit(void)
 
 void setup(void)
 {
-  pinMode(keyA, OUTPUT);
+  pinMode(keyA, INPUT);
   pinMode(keyB, INPUT);
-  digitalWrite(keyA, 1);
   Serial.begin(115200);
   bme.begin(0x76);
   Serial.println();
@@ -181,7 +180,7 @@ void loop(void)
         temp = bme.temperatureValue();
 				pre = bme.pressureValue();
 				hum = bme.humidityValue();
-				alt = bme.altitudeValue(SEALEVELPRESSURE);
+				alt = bme.altitudeValue(SEA_LEVEL_PRESSURE);
         numToStr(str_temp, temp);
         numToStr(str_hum, hum);
         numToStr2(str_pres, pre);
