@@ -16,7 +16,7 @@ platformio lib install 562
 ## Credits
 Referring to (https://github.com/squix78/esp8266-oled-ssd1306) of squix78 at here, Thanks for info and resource shared of squix78!
 
-some exceptional cool modules has been added to FireBeetle ESP Baords-DFR.Such as BMA220, BME280 and multilanguage character chips(Support Chinese now, still updating), one 5 directions switch and 2 digital keys.
+Some exceptional cool modules has been added to FireBeetle ESP Baords-DFR.Such as BMA220, BME280 and multilanguage character chips(Support Chinese now, still updating), one 5 directions switch and 2 digital keys.
 
 Note: Please download BME280 Arduino library first when use Humidity & Temperature sensors (https://github.com/DFRobot/DFRobot_BME280).
 
