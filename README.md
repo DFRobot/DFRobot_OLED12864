@@ -1,4 +1,4 @@
-#OLED12864 [![Build Status](https://travis-ci.org/squix78/esp8266-oled-ssd1306.svg?branch=dev-branch-3.0.0)](https://travis-ci.org/squix78/esp8266-oled-ssd1306)
+# OLED12864
 
 OLED12864 multifunctional module
 
