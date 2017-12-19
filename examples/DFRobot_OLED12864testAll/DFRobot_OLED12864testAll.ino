@@ -13,13 +13,16 @@
 #define ADC_SECTION 5
 #define SEA_LEVEL_PRESSURE 1013.25f
 
+#ifdef __AVR__
+const uint8_t pin_SPI_cs = 5, keyA = 3, keyB = 8;
+#elif ((defined __ets__) || (defined ESP_PLATFORM))
+const uint8_t pin_SPI_cs = D5, keyA = D3, keyB = D8;
+#endif
+
 const uint8_t  I2C_addr = 0x3c;
-const uint8_t  pin_SPI_cs = D5;
 const char     str_num[] = "0123456789";
 
 bool           metric = false;
-const uint8_t  keyA = D4;
-const uint8_t  keyB = D8;
 const uint8_t  pin_analogKey = A0;
 
 DFRobot_BME280    bme;
@@ -35,10 +38,10 @@ enum enum_key_analog {
 } key_analog;
 
 int8_t a = 0, b = 0, c = 0;
-char str_temp[] = "T:00.00  C"; 		 //温度
-char str_hum[]  = "H:00.00% RH"; 		 //湿度
-char str_pres[] = "P:00000  pa"; 	 //压力
-char str_alt[]  = "A:00000  m";		 //海拔
+char str_temp[] = "T:00.00  C";
+char str_hum[]  = "H:00.00% RH";
+char str_pres[] = "P:00000  pa";
+char str_alt[]  = "A:00000  m";
 char str_x[] = "X:+00";
 char str_y[] = "Y:+00";
 char str_z[] = "Z:+00";
@@ -154,6 +157,7 @@ void AccelerometerInit(void)
 
 void setup(void)
 {
+  delay(500);
   pinMode(keyA, INPUT);
   pinMode(keyB, INPUT);
   Serial.begin(115200);

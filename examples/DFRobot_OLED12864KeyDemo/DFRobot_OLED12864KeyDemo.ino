@@ -10,10 +10,13 @@
 
 #define ADC_SECTION 5
 
-const uint8_t pin_character_cs = D5;
+#ifdef __AVR__
+const uint8_t pin_character_cs = 5, keyA = 3, keyB = 8;
+#elif ((defined __ets__) || (defined ESP_PLATFORM))
+const uint8_t pin_character_cs = D5, keyA = D3, keyB = D8;
+#endif
+
 const uint8_t I2C_OLED_addr = 0x3c;
-const uint8_t keyA = D4;
-const uint8_t keyB = D8;
 const uint8_t pin_analogKey = A0;
 
 DFRobot_OLED12864 OLED(I2C_OLED_addr, pin_character_cs);
