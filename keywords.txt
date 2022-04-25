@@ -1,6 +1,17 @@
+#######################################
+# Syntax Coloring Map For DFRobot_OLED12864
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
 DFRobot_OLED12864	KEYWORD1
 OLEDDisplay	KEYWORD1
 OLEDDisplayUi	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
 
 disStr	KEYWORD2
 flipScreenVertically	KEYWORD2
@@ -65,3 +76,8 @@ switchToFrame	KEYWORD2
 transitionToFrame	KEYWORD2
 getUiState	KEYWORD2
 update	KEYWORD2
+
+
+#######################################
+# Instances (LITERAL1)
+#######################################

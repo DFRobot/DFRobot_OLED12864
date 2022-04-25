@@ -1,54 +1,51 @@
 # DFRobot_OLED12864
-* [中文版](./README_CN.md)
+* [English Version](./README.md)
 
-This is a driver for the SSD1306 based on 128x64 pixel OLED display running on the Arduino/ESP8266 platform. Can be used with either the I2C or SPI version of the display.
+这是基于在Arduino/ESP8266平台上运行的128x64像素OLED显示屏的SSD1306的驱动程序。可与 I2C 或 SPI 版本的显示器一起使用。
 
-The Ui Library is used to provide a basic set of Ui elements called, 'Frames' and 'Overlays'. A 'Frame' is used to provide
-information the default behaviour is to display a 'Frame' for a defined time and than move to the next. The library also provides an 'Indicator' that will be updated accordingly. An 'Overlay' on the other hand is a pieces of information (e.g. a clock) that is displayed always at the same position.
+Ui 库用于提供一组名为 Frames 和 Overlays 的基本 Ui 元素。Frame 用于提供信息，默认行为是在定义的时间内显示 Frame，然后移动到下一个时间。该库还提供了一个 Indicator 将相应更新的内容。另一方面 Overlay ，是始终显示在同一位置的信息片段（例如时钟）。
 
 ![产品实物图](./resources/images/OLED12864.png)
 
 > Please have a look at our [upgrade guide](UPGRADE.md)
 
-## Product Link (https://www.dfrobot.com/product-1744.html)
+## 产品链接 (https://www.dfrobot.com.cn/goods-1675.html)
     SKU: DFR0507
 
+## 目录
 
-## Table of Contents
-
-* [Summary](#summary)
-* [Installation](#installation)
-* [Methods](#methods)
-* [Compatibility](#compatibility)
-* [History](#history)
-* [Credits](#credits)
-
-
-## Summary
-
-* Draw pixels at given coordinates
-* Draw lines from given coordinates to given coordinates
-* Draw or fill a rectangle with given dimensions
-* Draw Text at given coordinates:
- * Define Alignment: Left, Right and Center
- * Set the Fontface you want to use (see section Fonts below)
- * Limit the width of the text by an amount of pixels. Before this widths will be reached, the renderer will wrap the text to a new line if possible
-* Display content in automatically side scrolling carousel
- * Define transition cycles
- * Define how long one frame will be displayed
- * Draw the different frames in callback methods
- * One indicator per frame will be automatically displayed. The active frame will be displayed from inactive once
+* [概述](#概述)
+* [库安装](#库安装)
+* [方法](#方法)
+* [兼容性](#兼容性)
+* [历史](#历史)
+* [创作者](#创作者)
 
 
-## Installation
+## 概述
 
-There two methods:
+* 在给定坐标处绘制像素
+* 从给定坐标绘制从给定坐标到给定坐标的线条
+* 绘制或填充具有给定尺寸的矩形
+* 在给定坐标处绘制文本：
+* 定义对齐方式：左、右和居中
+* 设置要使用的字体（请参阅下面的字体部分）
+* 将文本的宽度限制为像素数。在达到此宽度之前，如果可能，渲染器会将文本换行为新行
+* 在自动横向滚动轮播中显示内容
+* 定义过渡周期
+* 定义一帧的显示时间
+* 在回调方法中绘制不同的帧
+* 每帧将自动显示一个指示器。活动帧将从非活动状态显示一次
 
-1. To use this library, first download the library file, paste it into the \Arduino\libraries directory, then open the examples folder and run the demo in the folder.
-2. Search the DFRobot_OLED12864 library from the Arduino Software Library Manager and download it.
+## 库安装
+
+这里有2种安装方法：
+
+1. 使用此库前，请首先下载库文件，将其粘贴到\Arduino\libraries目录中，然后打开examples文件夹并在该文件夹中运行演示。
+2. 直接在Arduino软件库管理中搜索下载 DFRobot_OLED12864 库。
 
 
-## Methods
+## 方法
 
 ## I2C with Wire.h
 
@@ -496,7 +493,7 @@ int8_t update(void);
 ```
 
 
-## Compatibility
+## 兼容性
 
 MCU                | Work Well    | Work Wrong   | Untested    | Remarks
 ------------------ | :----------: | :----------: | :---------: | :----:
@@ -505,12 +502,12 @@ FireBeetle-ESP32   |      √       |              |             |
 FireBeetle-BLE4.1  |              |       √      |             |
 
 
-## History
+## 历史
 
-- 2022/04/02 - Version 1.0.0 released.
+- 2022/04/02 - 1.0.0 版本
 
 
-## Credits
+## 创作者
 
-Written by qsjhyy(yihuan.huang@dfrobot.com), 2022. (Welcome to our [website](https://www.dfrobot.com/))
+Written by wxzed(xiao.wu@dfrobot.com), 2022. (Welcome to our [website](https://www.dfrobot.com/))
 
