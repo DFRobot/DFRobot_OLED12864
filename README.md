@@ -9,6 +9,8 @@ information the default behaviour is to display a 'Frame' for a defined time and
 ![产品实物图](./resources/images/OLED12864.png)
 
 > Please have a look at our [upgrade guide](UPGRADE.md)
+
+
 Referring to (https://github.com/squix78/esp8266-oled-ssd1306) of squix78 at here, thanks for info and resource shared of squix78!
 
 Some exceptional cool modules has been added to FireBeetle ESP Baords-DFR.Such as BMA220, BME280 and multilanguage character chips(Support Chinese now, still updating), one 5 directions switch and 2 digital keys.
@@ -16,6 +18,7 @@ Some exceptional cool modules has been added to FireBeetle ESP Baords-DFR.Such a
 Note: Please download BME280 Arduino library first when use Humidity & Temperature sensors (https://github.com/DFRobot/DFRobot_BME280).
 
 For more questions or interesting projects, you can visit the [forum](https://www.dfrobot.com/)!
+
 
 ## Product Link (https://www.dfrobot.com/product-1744.html)
     SKU: DFR0507
